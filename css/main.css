@@ -1,0 +1,17 @@
+.freeDay{
+    float: right;
+}
+
+.rasp{
+    /*clear: both;*/
+    width: 700px;
+}
+.rasp td{
+    border: 1px solid #000;
+}
+.sant{
+    margin: 0;
+}
+.weight{
+    font-weight: bold;
+}
