@@ -50,6 +50,7 @@ var flagWeek=0;//если 5я неделя, то службы распределять
 var rasp={}
 var weekDey=month.first;
 var numWeek=1;
+
 function fun(data)
 {
 
@@ -123,8 +124,12 @@ for(var f=1;f<=countPrist;f++){
     freeDay[f]=month.last-stat['все']-stat[f];
 }
 
+dispRasp();
 
 
+}
+
+function dispRasp(){
     var i=1;
     for(var key in req){
         var dDay = req[key][0].split(' ');
@@ -144,31 +149,56 @@ for(var f=1;f<=countPrist;f++){
         $('<p>'+prist[f]+': '+freeDay[f]+'</p>').appendTo('.freeDay');
     }
 
-    $('.sant').click(function(){$(this).toggleClass('weight');})
+    $('.sant').click(function(){$(this).toggleClass('weight');});
 }
 
 $(document).ready(function(){
+
     var req;
     var today=new Date();
-    var mm=today.getMonth()+1;
+    var mm=today.getMonth()+2;
     var dd=0;//today.getDate();
     var yy=today.getFullYear();
-    var dt=1;
-    var hh=1;
-    var ll=1;
-    var tt=1;
-    var ss=1;
-    $.ajax({
-        type: 'get',
-        dataType: 'jsonp',
-        url: 'http://j92606we.bget.ru/request.php',
-        data: {
-            month: mm,
-            today: dd,
-            year: yy
-        },
-        jsonpCallback:'fun'
+
+    //init tuning form
+    $('.tune .year').children('option:first').html(yy);
+    $('.tune .year').children('option:first').val(yy);
+    $('.tune .year').children('option:last').html(1+parseInt(yy));
+    $('.tune .year').children('option:last').val(1+parseInt(yy));
+    $('.tune .month').children('option[value="'+mm+'"]').attr("selected", "selected");
+
+    //if data in localStorage
+    localStorage.prist=JSON.stringify(prist);//"{1:'о.Филипп',2:'о.Александр'}";
+    var testOLS=JSON.parse(localStorage.prist);
+    console.log(testOLS[1]);
+
+    $('.input_prist .add').click(function(){
+        var litera=$(this).attr('class').slice(0,1);
+        var cnt=$(".input_prist_"+litera).children("input").length+1;
+        $(".input_prist_"+litera).append('<input type="text" name="ip'+litera+cnt+'"><span class="del">x</span>');
     });
+    $('.input_prist').on('click','.del',function(){
+        $(this).prev('br:first').remove();
+        $(this).prev('input:first').remove();
+        $(this).remove();
+    });
+
+//    var dt=1;
+//    var hh=1;
+//    var ll=1;
+//    var tt=1;
+//    var ss=1;
+//    $.ajax({
+//        type: 'get',
+//        dataType: 'jsonp',
+//        url: 'http://j92606we.bget.ru/request.php',
+//        data: {
+//            month: mm,
+//            today: dd,
+//            year: yy
+//        },
+//        jsonpCallback:'fun'
+//    });
 
 
 
