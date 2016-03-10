@@ -179,7 +179,7 @@ $(document).ready(function(){
             if(addPrist.length){
                 var cnt=$(".input_prist_s").children("input").length;
                 $(".input_prist_s")
-                    .append('<input type="text" value="'+addPrist+'" name="ips'+cnt+'"><span name="ips'+cnt+'" class="del">x</span>' +
+                    .append('<input class="person" type="text" value="'+addPrist+'" name="ips'+cnt+'"><span name="ips'+cnt+'" class="del">x</span>' +
                         ' <span name="ips'+cnt+'" class="dweek" value="1">Ïí</span>'+
                         ' <span name="ips'+cnt+'" class="dweek" value="2">Âò</span>'+
                         ' <span name="ips'+cnt+'" class="dweek" value="3">Ñğ</span>'+
@@ -187,7 +187,7 @@ $(document).ready(function(){
                         ' <span name="ips'+cnt+'" class="dweek" value="5">Ïò</span>'+
                         ' <span name="ips'+cnt+'" class="dweek" value="6">Ñá</span>'+
                         ' <span name="ips'+cnt+'" class="dweek act" value="7">Âñ</span>'+
-                        ' <input name="ips'+cnt+'" type="text"> <input name="ips'+cnt+'" type="text">');
+                        ' <input class="person-data-act" name="ips'+cnt+'" type="text"> <input class="person-data-novalid" name="ips'+cnt+'" type="text">');
             }
             addPrist=pristLS[key];
         }
@@ -198,7 +198,7 @@ $(document).ready(function(){
         var litera=$(this).attr('class').slice(0,1);
         var cnt=$(".input_prist_"+litera).children("input").length+1;
         $(".input_prist_"+litera)
-            .append('<input type="text" name="ip'+litera+cnt+'"><span name="ip'+litera+cnt+'" class="del">x</span>' +
+            .append('<input class="person" type="text" name="ip'+litera+cnt+'"><span name="ip'+litera+cnt+'" class="del">x</span>' +
             ' <span name="ip'+litera+cnt+'" class="dweek" value="1">Ïí</span>'+
             ' <span name="ip'+litera+cnt+'" class="dweek" value="2">Âò</span>'+
             ' <span name="ip'+litera+cnt+'" class="dweek" value="3">Ñğ</span>'+
@@ -206,7 +206,7 @@ $(document).ready(function(){
             ' <span name="ip'+litera+cnt+'" class="dweek" value="5">Ïò</span>'+
             ' <span name="ip'+litera+cnt+'" class="dweek" value="6">Ñá</span>'+
             ' <span name="ip'+litera+cnt+'" class="dweek act" value="7">Âñ</span>'+
-            ' <input name="ip'+litera+cnt+'" type="text"> <input name="ip'+litera+cnt+'" type="text">');
+            ' <input class="person-data-act" name="ip'+litera+cnt+'" type="text"> <input class="person-data-novalid" name="ip'+litera+cnt+'" type="text">');
     });
     $('.input_prist').on('click','.del',function(){
         var nameField=$(this).attr('name');
