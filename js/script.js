@@ -178,7 +178,16 @@ $(document).ready(function(){
         for(var key in pristLS){
             if(addPrist.length){
                 var cnt=$(".input_prist_s").children("input").length;
-                $(".input_prist_s").append('<input type="text" value="'+addPrist+'" name="ips'+cnt+'"><span class="del">x</span>');
+                $(".input_prist_s")
+                    .append('<input type="text" value="'+addPrist+'" name="ips'+cnt+'"><span name="ips'+cnt+'" class="del">x</span>' +
+                        ' <span name="ips'+cnt+'" class="dweek" value="1">Ïí</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek" value="2">Âò</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek" value="3">Ñð</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek" value="4">×ò</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek" value="5">Ïò</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek" value="6">Ñá</span>'+
+                        ' <span name="ips'+cnt+'" class="dweek act" value="7">Âñ</span>'+
+                        ' <input name="ips'+cnt+'" type="text"> <input name="ips'+cnt+'" type="text">');
             }
             addPrist=pristLS[key];
         }
@@ -188,14 +197,36 @@ $(document).ready(function(){
     $('.input_prist .add').click(function(){
         var litera=$(this).attr('class').slice(0,1);
         var cnt=$(".input_prist_"+litera).children("input").length+1;
-        $(".input_prist_"+litera).append('<input type="text" name="ip'+litera+cnt+'"><span class="del">x</span>');
+        $(".input_prist_"+litera)
+            .append('<input type="text" name="ip'+litera+cnt+'"><span name="ip'+litera+cnt+'" class="del">x</span>' +
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="1">Ïí</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="2">Âò</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="3">Ñð</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="4">×ò</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="5">Ïò</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek" value="6">Ñá</span>'+
+            ' <span name="ip'+litera+cnt+'" class="dweek act" value="7">Âñ</span>'+
+            ' <input name="ip'+litera+cnt+'" type="text"> <input name="ip'+litera+cnt+'" type="text">');
     });
     $('.input_prist').on('click','.del',function(){
-        $(this).prev('br:first').remove();
-        $(this).prev('input:first').remove();
-        $(this).remove();
+        var nameField=$(this).attr('name');
+        $('[name="'+nameField+'"]').remove();
     });
-
+    $('.input_prist').on('click','.dweek',function(){
+//        console.log($(this));
+        if($(this).hasClass('novalid')){
+            $(this).removeClass('novalid');
+            $(this).addClass('act');
+        }
+        else{
+            if($(this).hasClass('act')){
+                $(this).removeClass('act');
+            }
+            else{
+                $(this).addClass('novalid');
+            }
+        }
+    });
 //    var dt=1;
 //    var hh=1;
 //    var ll=1;

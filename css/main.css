@@ -28,6 +28,28 @@
     cursor: pointer;
     color: red;
 }
+.tune .input_prist input{
+    margin-bottom: 15px;
+}
 .input_prist_d,.input_prist_s{
-    width: 200px;
+    width: 800px;
+}
+.data-act{
+    margin-left:400px;
+}
+.data-novalid{
+    margin-left: 80px;
+}
+.dweek{
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.dweek.novalid{
+    border: 2px solid red;
+}
+.dweek.act{
+    border: 2px solid green;
 }
