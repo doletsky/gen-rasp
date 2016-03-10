@@ -168,9 +168,22 @@ $(document).ready(function(){
     $('.tune .month').children('option[value="'+mm+'"]').attr("selected", "selected");
 
     //if data in localStorage
-    localStorage.prist=JSON.stringify(prist);//"{1:'о.Филипп',2:'о.Александр'}";
-    var testOLS=JSON.parse(localStorage.prist);
-    console.log(testOLS[1]);
+//    localStorage.prist=JSON.stringify(prist);//"{1:'о.Филипп',2:'о.Александр'}";
+
+    if(window.localStorage.prist){
+        //load from localStorage
+        var pristLS=JSON.parse(localStorage.prist);
+        $('.input_prist_s').html('');//clear list
+        var addPrist='';
+        for(var key in pristLS){
+            if(addPrist.length){
+                var cnt=$(".input_prist_s").children("input").length;
+                $(".input_prist_s").append('<input type="text" value="'+addPrist+'" name="ips'+cnt+'"><span class="del">x</span>');
+            }
+            addPrist=pristLS[key];
+        }
+
+    }
 
     $('.input_prist .add').click(function(){
         var litera=$(this).attr('class').slice(0,1);
