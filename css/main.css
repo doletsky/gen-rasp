@@ -53,3 +53,15 @@
 .dweek.act{
     border: 2px solid green;
 }
+.start{
+    /* float: right; */
+    width: 300px;
+    border: 1px solid #000;
+    color: #fff;
+    background-color: darkslategrey;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 480px;
+}

@@ -177,7 +177,7 @@ $(document).ready(function(){
         var addPrist='';
         for(var key in pristLS){
             if(addPrist.length){
-                var cnt=$(".input_prist_s").children("input").length;
+                var cnt=$(".input_prist_s").children("input.person").length;
                 $(".input_prist_s")
                     .append('<input class="person" type="text" value="'+addPrist+'" name="ips'+cnt+'"><span name="ips'+cnt+'" class="del">x</span>' +
                         ' <span name="ips'+cnt+'" class="dweek" value="1">ѕн</span>'+
@@ -196,7 +196,7 @@ $(document).ready(function(){
 
     $('.input_prist .add').click(function(){
         var litera=$(this).attr('class').slice(0,1);
-        var cnt=$(".input_prist_"+litera).children("input").length+1;
+        var cnt=$(".input_prist_"+litera).children("input.person").length+1;
         $(".input_prist_"+litera)
             .append('<input class="person" type="text" name="ip'+litera+cnt+'"><span name="ip'+litera+cnt+'" class="del">x</span>' +
             ' <span name="ip'+litera+cnt+'" class="dweek" value="1">ѕн</span>'+
@@ -213,7 +213,6 @@ $(document).ready(function(){
         $('[name="'+nameField+'"]').remove();
     });
     $('.input_prist').on('click','.dweek',function(){
-//        console.log($(this));
         if($(this).hasClass('novalid')){
             $(this).removeClass('novalid');
             $(this).addClass('act');
@@ -226,6 +225,60 @@ $(document).ready(function(){
                 $(this).addClass('novalid');
             }
         }
+    });
+
+    //start genrasp
+    $('.start').click(function(){
+        //собираем prist
+        var cntPerson=1;
+        var persons={};
+        var rulePerson={};
+        $('.input_prist_s .person').each(function(){
+            if($(this).val().length>0){
+                //name
+                persons[cntPerson]=$(this).val();
+                //dweek
+                var nmdw=$(this).attr('name');
+                rulePerson[cntPerson]={};
+                rulePerson[cntPerson]['dweek']={};
+                rulePerson[cntPerson]['dmonth']={};
+                $('.dweek[name="'+nmdw+'"]').each(function(){
+                    var dwVal=$(this).attr('value');
+                    if($(this).hasClass('novalid')){
+                        rulePerson[cntPerson]['dweek'][dwVal]= "novalid";
+                    }
+                    if($(this).hasClass('act')){
+                        rulePerson[cntPerson]['dweek'][dwVal]= "act";
+                    }
+                });
+                var strDmonthAct=$('.person-data-act[name="'+nmdw+'"]').val();
+                var arDmonthAct= strDmonthAct.split(',');
+                for(var i in arDmonthAct){
+                    var arLine=arDmonthAct[i].split('-');
+                    if(arLine.length>1){
+                        for(var j=parseInt(arLine[0]);j<=parseInt(arLine[1]);j++){
+                            rulePerson[cntPerson]['dmonth'][j]='act';
+                        }
+                    }else{
+                        rulePerson[cntPerson]['dmonth'][parseInt(arDmonthAct[i])]='act';
+                    }
+                }
+                var strDmonthnovalid=$('.person-data-novalid[name="'+nmdw+'"]').val();
+                var arDmonthnovalid= strDmonthnovalid.split(',');
+                for(var i in arDmonthnovalid){
+                    var arLine=arDmonthnovalid[i].split('-');
+                    if(arLine.length>1){
+                        for(var j=parseInt(arLine[0]);j<=parseInt(arLine[1]);j++){
+                            rulePerson[cntPerson]['dmonth'][j]='novalid';
+                        }
+                    }else{
+                        rulePerson[cntPerson]['dmonth'][parseInt(arDmonthnovalid[i])]='novalid';
+                    }
+                }
+                cntPerson++;
+            }
+        });
+        console.log(rulePerson);
     });
 //    var dt=1;
 //    var hh=1;
